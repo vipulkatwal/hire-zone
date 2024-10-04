@@ -6,6 +6,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Link from "next/link";
+import Image from 'next/image'; // Import Image from next/image
 
 export default function JobRow({ jobDoc }: { jobDoc: Job }) {
   const [liked, setLiked] = useState(false);
@@ -22,9 +23,7 @@ export default function JobRow({ jobDoc }: { jobDoc: Job }) {
         aria-label={liked ? 'Unlike job' : 'Like job'}
       >
         <FontAwesomeIcon
-          className={`h-5 w-5 transition-colors duration-300 ${
-            liked ? 'text-red-500' : 'text-gray-300 hover:text-gray-400'
-          }`}
+          className={`h-5 w-5 transition-colors duration-300 ${liked ? 'text-red-500' : 'text-gray-300 hover:text-gray-400'}`}
           icon={faHeart}
         />
       </button>
@@ -32,10 +31,12 @@ export default function JobRow({ jobDoc }: { jobDoc: Job }) {
       <div className="flex gap-4 items-start">
         <div className="w-14 h-14 rounded-lg border border-gray-200 overflow-hidden flex-shrink-0 bg-white">
           {jobDoc?.jobIcon ? (
-            <img
+            <Image // Use Image instead of img
               className="w-full h-full object-contain p-2"
               src={jobDoc.jobIcon}
               alt={`${jobDoc.orgName} logo`}
+              width={56} // Specify a width (adjust as necessary)
+              height={56} // Specify a height (adjust as necessary)
             />
           ) : (
             <div className="w-full h-full bg-gray-50 flex items-center justify-center text-gray-400">
