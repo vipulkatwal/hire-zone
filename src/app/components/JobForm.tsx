@@ -1,13 +1,22 @@
 'use client';
-import {saveJobAction} from "@/app/actions/jobActions";
+
+import { saveJobAction } from "@/app/actions/jobActions";
 import ImageUpload from "@/app/components/ImageUpload";
-import type {Job} from "@/models/Job";
-import {faEnvelope, faMobile, faPerson, faPhone, faStar, faUser} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Button, RadioGroup, TextArea, TextField, Theme} from "@radix-ui/themes";
-import {redirect} from "next/navigation";
-import {useState} from "react";
+import type { Job } from "@/models/Job";
+import { faEnvelope, faPhone, faStar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, RadioGroup, TextArea, TextField, Theme } from "@radix-ui/themes";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 import "react-country-state-city/dist/react-country-state-city.css";
+
+// Add this type declaration at the top of your file
+declare module 'react-country-state-city' {
+  export const CountrySelect: React.ComponentType<any>;
+  export const StateSelect: React.ComponentType<any>;
+  export const CitySelect: React.ComponentType<any>;
+}
+
 import {
   CitySelect,
   CountrySelect,
@@ -42,7 +51,7 @@ export default function JobForm({orgId, jobDoc}: {orgId: string; jobDoc?: Job}) 
       >
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Post a Job</h2>
         {jobDoc && (
-          <input type="hidden" name="id" value={jobDoc?._id}/>
+          <input type="hidden" name="id" value={jobDoc._id}/>
         )}
         <TextField.Root name="title" placeholder="Enter job title" defaultValue={jobDoc?.title || ''} className="mb-6 w-full"/>
         <div className="grid sm:grid-cols-3 gap-6 mb-6">
