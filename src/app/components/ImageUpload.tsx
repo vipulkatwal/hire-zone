@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudUploadAlt, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Image from 'next/image';
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core"; // Import IconDefinition
 
 // Define the props for the FileUpload component
 interface FileUploadProps {
