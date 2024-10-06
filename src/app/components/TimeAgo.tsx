@@ -1,10 +1,10 @@
 'use client';
 import ReactTimeAgo from 'react-timeago';
 
-export default function TimeAgo({createdAt}:{createdAt:string}) {
+export default function TimeAgo({ createdAt }: { createdAt: string }) {
   return (
     <>
-      <ReactTimeAgo date={createdAt}/>
+      <ReactTimeAgo date={createdAt} />
     </>
   );
 }

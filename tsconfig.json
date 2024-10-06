@@ -32,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/@types/**/*" // Add this line
+    "src/@types/**/*",
+    "src/types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"
