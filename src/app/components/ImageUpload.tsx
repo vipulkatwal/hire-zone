@@ -4,13 +4,19 @@ import { faCloudUploadAlt, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Image from 'next/image';
 
+// Define the props for the FileUpload component
+interface FileUploadProps {
+  name: string;
+  defaultValue?: string; // Make defaultValue optional
+  icon?: IconDefinition;  // Add the icon prop
+}
+
+// Update the component to accept the icon prop
 export default function FileUpload({
   name,
   defaultValue = '',
-}: {
-  name: string;
-  defaultValue: string;
-}) {
+  icon = faCloudUploadAlt, // Default icon if none is provided
+}: FileUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [fileName, setFileName] = useState(defaultValue);
@@ -96,7 +102,7 @@ export default function FileUpload({
           </div>
         ) : (
           <FontAwesomeIcon
-            icon={faCloudUploadAlt}
+            icon={icon} // Use the passed icon prop here
             className="text-3xl mb-2 text-gray-400"
           />
         )}
