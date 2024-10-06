@@ -10,13 +10,15 @@ interface FileUploadProps {
   name: string;
   defaultValue?: string; // Make defaultValue optional
   icon?: IconDefinition;  // Add the icon prop
+  className?: string;      // Add className prop
 }
 
-// Update the component to accept the icon prop
+// Update the component to accept the icon and className props
 export default function FileUpload({
   name,
   defaultValue = '',
   icon = faCloudUploadAlt, // Default icon if none is provided
+  className = '',          // Default to an empty string if not provided
 }: FileUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -69,7 +71,7 @@ export default function FileUpload({
 
   return (
     <div
-      className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-all duration-300 mb-4 ${
+      className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-all duration-300 mb-4 ${className} ${
         isDragging ? 'border-blue-500 bg-blue-50 mb-2' : 'border-gray-300 hover:border-gray-400'
       }`}
       onClick={() => fileInputRef.current?.click()}
