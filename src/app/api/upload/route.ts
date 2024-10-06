@@ -2,11 +2,6 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { NextRequest } from "next/server";
 import uniqid from 'uniqid';
 
-// Add this type declaration at the top of your file
-declare module 'uniqid' {
-  export default function uniqid(): string;
-}
-
 export async function POST(req: NextRequest) {
   const data = await req.formData();
   const file = data.get('file') as File;
