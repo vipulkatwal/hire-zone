@@ -1,13 +1,12 @@
 'use client'
 
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Search } from 'lucide-react';
 
 export default function Hero() {
   const [searchPhrase, setSearchPhrase] = useState('');
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Implement search functionality here
     console.log('Searching for:', searchPhrase);
@@ -29,7 +28,7 @@ export default function Hero() {
           className="border-2 border-gray-300 w-full py-3 px-4 pr-12 rounded-full focus:outline-none focus:border-blue-500 transition-all duration-300"
           placeholder="Search jobs, companies, or skills..."
           value={searchPhrase}
-          onChange={(e) => setSearchPhrase(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchPhrase(e.target.value)}
         />
         <button
           type="submit"
