@@ -1,3 +1,8 @@
+// Add this type declaration at the top of the file
+declare module 'uniqid' {
+  export default function uniqid(): string;
+}
+
 import {PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
 import {NextRequest} from "next/server";
 import uniqid from 'uniqid';
@@ -14,12 +19,10 @@ export async function POST(req: NextRequest) {
     },
   });
 
-
   const newFilename = `${uniqid()}-${file.name}`;
 
   // blob data of our file
   const chunks = [];
-  // @ts-ignore
   for await (const chunk of file.stream()) {
     chunks.push(chunk);
   }
