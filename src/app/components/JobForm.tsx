@@ -10,7 +10,8 @@ import { useState } from "react";
 import "react-country-state-city/dist/react-country-state-city.css";
 import { CitySelect, CountrySelect, StateSelect } from "react-country-state-city";
 
-export default function JobForm({ orgId, jobDoc }: { orgId: string; jobDoc?: Job }) {
+// Update the props type to include className
+export default function JobForm({ orgId, jobDoc, className }: { orgId: string; jobDoc?: Job; className?: string }) {
   const [countryId, setCountryId] = useState(jobDoc?.countryId || 0);
   const [stateId, setStateId] = useState(jobDoc?.stateId || 0);
   const [cityId, setCityId] = useState(jobDoc?.cityId || 0);
@@ -57,27 +58,27 @@ export default function JobForm({ orgId, jobDoc }: { orgId: string; jobDoc?: Job
     <Theme>
       <form
         action={handleSaveJob}
-        className="container mx-auto px-4 py-8 max-w-4xl font-sans bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg rounded-xl"
+        className={`container mx-auto px-4 py-8 max-w-4xl font-sans bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg rounded-xl ${className}`}
       >
         <h2 className="text-3xl font-bold text-indigo-800 mb-8 text-center">Create New Job Posting</h2>
         {jobDoc && <input type="hidden" name="id" value={jobDoc?._id} />}
 
         <div className="mb-6">
-  <div className="flex gap-6">
-    <div className="flex-1">
-      <label className="block text-sm font-semibold text-indigo-700 mb-2">Job Title</label>
-      <TextField.Root name="title" placeholder="Job Title" defaultValue={jobDoc?.title || ''} className="w-full text-lg" />
-      {errors.title && <p className="text-red-600">{errors.title}</p>}
-    </div>
-    <div className="flex-1">
-      <label className="block text-sm font-semibold text-indigo-700 mb-2">Salary (LPA)</label>
-      <TextField.Root name="salary" defaultValue={jobDoc?.salary || ''} className="w-full">
-        <TextField.Slot>₹</TextField.Slot>
-      </TextField.Root>
-      {errors.salary && <p className="text-red-600">{errors.salary}</p>}
-    </div>
-  </div>
-</div>
+          <div className="flex gap-6">
+            <div className="flex-1">
+              <label className="block text-sm font-semibold text-indigo-700 mb-2">Job Title</label>
+              <TextField.Root name="title" placeholder="Job Title" defaultValue={jobDoc?.title || ''} className="w-full text-lg" />
+              {errors.title && <p className="text-red-600">{errors.title}</p>}
+            </div>
+            <div className="flex-1">
+              <label className="block text-sm font-semibold text-indigo-700 mb-2">Salary (LPA)</label>
+              <TextField.Root name="salary" defaultValue={jobDoc?.salary || ''} className="w-full">
+                <TextField.Slot>₹</TextField.Slot>
+              </TextField.Root>
+              {errors.salary && <p className="text-red-600">{errors.salary}</p>}
+            </div>
+          </div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <div>
