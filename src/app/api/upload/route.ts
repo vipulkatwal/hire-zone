@@ -1,11 +1,11 @@
-// Add this type declaration at the top of the file
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { NextRequest } from "next/server";
+import uniqid from 'uniqid';
+
+// Add this type declaration at the top of your file
 declare module 'uniqid' {
   export default function uniqid(): string;
 }
-
-import {PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
-import {NextRequest} from "next/server";
-import uniqid from 'uniqid';
 
 export async function POST(req: NextRequest) {
   const data = await req.formData();
@@ -21,12 +21,9 @@ export async function POST(req: NextRequest) {
 
   const newFilename = `${uniqid()}-${file.name}`;
 
-  // blob data of our file
-  const chunks = [];
-  for await (const chunk of file.stream()) {
-    chunks.push(chunk);
-  }
-  const buffer = Buffer.concat(chunks);
+  // Convert File to Buffer
+  const arrayBuffer = await file.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
 
   const bucketName = 'vipul-hire-zone';
   await s3Client.send(new PutObjectCommand({
